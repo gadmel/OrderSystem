@@ -99,7 +99,6 @@ class ShopServiceTest {
 		@Test
 		@DisplayName("List orders in Shop Service")
 		void listOrders() {
-
 			Assertions.assertEquals(List.of(order), fullShopService.listOrders());
 		}
 	}
