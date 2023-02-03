@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Nested;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -30,6 +31,7 @@ class ShopServiceTest {
 	Product bmw;
 	ProductRepo productRepo;
 	Order order;
+	Order invalidOrder;
 
 	@BeforeEach
 	@DisplayName("Set up the Testing variables")
@@ -37,8 +39,10 @@ class ShopServiceTest {
 		// Given
 		bmw = new Car(1, "BMW", new BigDecimal("2500000"));
 		kawasaki = new Motorcycle(2, "Kawasaki", new BigDecimal("1200000"));
+		Product mercedes = new Car(3, "Mercedes", new BigDecimal("1000000000"));
 		products = List.of(kawasaki, bmw);
 		order = new Order(1, products);
+		invalidOrder = new Order(2, List.of(bmw, kawasaki, mercedes));
 		productRepo = new ProductRepo(products);
 		emptyShopService = new ShopService(productRepo);
 		fullShopService = new ShopService(productRepo , new OrderRepo(List.of(order)));
@@ -88,6 +92,14 @@ class ShopServiceTest {
 			int prev = emptyShopService.listOrders().size();
 			emptyShopService.addOrder(order);
 			Assertions.assertEquals(prev + 1, emptyShopService.listOrders().size());
+		}
+
+		@Test
+		@DisplayName("Add order in Shop Service, Product does not exist")
+		void addOrder_productNotExisting() {
+			Assertions.assertThrows(NoSuchElementException.class, () -> {
+				emptyShopService.addOrder(invalidOrder);
+			});
 		}
 
 		@Test

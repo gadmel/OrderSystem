@@ -9,6 +9,7 @@ import org.groupOne.repositories.OrderRepo;
 import org.groupOne.repositories.ProductRepo;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -25,14 +26,26 @@ public class ShopService {
 	}
 
 	public List<Product> listProducts() {
+		return listProducts(false);
+	}
+
+	public List<Product> listProducts(boolean silent) {
 		List<Product> productList = availableProducts.listProducts();
-		System.out.println("These are the products in the repository:");
-		for (Product p : productList) {
-			System.out.println("- " + p);
+		if (!silent) {
+			System.out.println("These are the products in the repository:");
+			for (Product p : productList) {
+				System.out.println("- " + p);
+			}
 		}
 		return productList;
 	}
 	public void addOrder(Order order) {
+		order.getOrderedProducts().stream()
+						.forEach(p -> {
+							if (!listProducts(true).contains(p)) {
+								throw new NoSuchElementException("Product " + p + " does not exist in this shop! Where did you find it?");
+							}
+						});
 		currentOrders.addSingleOrder(order);
 	}
 
