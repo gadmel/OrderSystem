@@ -2,12 +2,14 @@ package org.groupOne.model;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.time.ZonedDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Getter
+@ToString
 public class Order {
 	private final int id;
 	private final List<Product> orderedProducts;

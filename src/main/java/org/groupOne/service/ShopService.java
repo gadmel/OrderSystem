@@ -37,11 +37,18 @@ public class ShopService {
 	}
 
 	public Optional<Order> getOrderById(int id) {
-		return currentOrders.getById(id);
+		Optional<Order> result = currentOrders.getById(id);
+		System.out.println(result.isPresent() ? result.get().toString() : "Order does not exist!");
+		return result;
 	}
 
 	public List<Order> listOrders() {
-		return currentOrders.listOrders();
+		List<Order> orderList = currentOrders.listOrders();
+		System.out.println("These are the current orders:");
+		for (Order o : orderList) {
+			System.out.println("- " + o);
+		}
+		return orderList;
 	}
 
 }
