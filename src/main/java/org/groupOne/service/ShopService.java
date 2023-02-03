@@ -2,6 +2,7 @@ package org.groupOne.service;
 
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+
 import org.groupOne.model.Product;
 import org.groupOne.model.Order;
 import org.groupOne.repositories.OrderRepo;
@@ -29,19 +30,18 @@ public class ShopService {
 		for (Product p : productList) {
 			System.out.println("- " + p);
 		}
-		//System.out.println(productList);
 		return productList;
 	}
-
 	public void addOrder(Order order) {
+		currentOrders.addSingleOrder(order);
 	}
 
-	public Optional<Order> getOrderById() {
-		return null;
+	public Optional<Order> getOrderById(int id) {
+		return currentOrders.getById(id);
 	}
 
 	public List<Order> listOrders() {
-		return null;
+		return currentOrders.listOrders();
 	}
 
 }
