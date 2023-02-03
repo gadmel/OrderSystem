@@ -16,6 +16,7 @@ public class ProductRepo {
 	public List<Product> listProducts() {
 		return products;
 	}
+
 	public Optional<Product> getProductById(int id) {
 		return products.stream()
 				.filter(p -> p.getId() == id)
