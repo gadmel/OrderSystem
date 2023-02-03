@@ -14,6 +14,10 @@ public class Order {
 	private OrderStatus status = OrderStatus.NEW;
 	private final ZonedDateTime creationTime = ZonedDateTime.now();
 
+	public int getId() {
+		return id;
+	}
+
 	public void setStatus(OrderStatus status) {
 		this.status = status;
 	}

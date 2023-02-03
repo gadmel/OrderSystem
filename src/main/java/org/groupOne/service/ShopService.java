@@ -13,19 +13,19 @@ public class ShopService {
 	private OrderRepo currentOrders;
 //	private OrderRepo archivedOrders;
 
-	public Optional<Product> getProductById(int id) {
-	}
-
-	public List<Product> listProducts() {
-	}
-
-	public void addOrder(Order order) {
-	}
-
-	public Optional<Order> getOrderById() {
-	}
-
-	public List<Order> listOrders() {
-	}
+//	public Optional<Product> getProductById(int id) {
+//	}
+//
+//	public List<Product> listProducts() {
+//	}
+//
+//	public void addOrder(Order order) {
+//	}
+//
+//	public Optional<Order> getOrderById() {
+//	}
+//
+//	public List<Order> listOrders() {
+//	}
 
 }
