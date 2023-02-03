@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -18,9 +19,18 @@ public class OrderRepo {
 	}
 
 	public Optional<Order> getById(int id) {
-		//return orders.stream().filter(order -> order.getId() == id).findFirst();
-		return Optional.empty();
+		try {
+			for (Order order : orders) {
+				if (order.getId() == id) {
+					return Optional.of(order);
+				}
+			}
+		} catch (Exception e) {
+			return Optional.empty();
+		}
+		throw new IllegalArgumentException("No order with id " + id);
 	}
+
 
 	public void addSingleOrder(Order order) {
 		orders.add(order);
