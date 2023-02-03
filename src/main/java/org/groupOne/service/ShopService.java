@@ -18,7 +18,9 @@ public class ShopService {
 //	private OrderRepo archivedOrders;
 
 	public Optional<Product> getProductById(int id) {
-		return availableProducts.getProductById(id);
+		Optional<Product> result = availableProducts.getProductById(id);
+		System.out.println(result.isPresent() ? result.toString() : "Product does not exist!");
+		return result;
 	}
 
 	public List<Product> listProducts() {
