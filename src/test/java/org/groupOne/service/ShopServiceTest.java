@@ -11,6 +11,10 @@ class ShopServiceTest {
 
 	@Test
 	void listProducts() {
+		//WHEN
+		List<Product> actualProductList = shopService.listProducts();
+		//THEN
+		assertThat(actualProductList).containsExactlyInAnyOrderElementsOf(products);
 	}
 
 	@Test
