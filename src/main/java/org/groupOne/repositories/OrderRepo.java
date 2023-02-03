@@ -19,16 +19,12 @@ public class OrderRepo {
 	}
 
 	public Optional<Order> getById(int id) {
-		try {
-			for (Order order : orders) {
-				if (order.getId() == id) {
-					return Optional.of(order);
-				}
+		for (Order order : orders) {
+			if (order.getId() == id) {
+				return Optional.of(order);
 			}
-		} catch (Exception e) {
-			return Optional.empty();
 		}
-		throw new IllegalArgumentException("No order with id " + id);
+		return Optional.empty();
 	}
 
 
