@@ -1,8 +1,8 @@
 package org.groupOne.repositories;
 
-import lombok.NoArgsConstructor;
 import org.groupOne.model.Order;
 
+import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

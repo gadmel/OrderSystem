@@ -15,7 +15,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ShopService {
 	private final ProductRepo availableProducts;
-	private OrderRepo currentOrders;
+	private OrderRepo currentOrders =new OrderRepo();
 //	private OrderRepo archivedOrders;
 
 	public Optional<Product> getProductById(int id) {

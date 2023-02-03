@@ -69,22 +69,6 @@ class ShopServiceTest {
 	@DisplayName("Testing the shop service - order methods")
 	@Nested
 	class testShopServiceOrderMethods {
-		ShopService emptyShopService;
-		ShopService fullShopService;
-
-		Product bmw;
-		Product kawasaki;
-		Order order;
-		@BeforeEach
-		@DisplayName("Set up the Testing variables")
-		@Test
-		void setUp() {
-			bmw = new Car(1, "BMW", new BigDecimal("2500000"));
-			kawasaki = new Motorcycle(2, "Kawasaki", new BigDecimal("1200000"));
-			order = new Order(1, List.of(bmw, kawasaki));
-			emptyShopService = new ShopService();
-			fullShopService = new ShopService(null , new OrderRepo(List.of(order)));
-		}
 
 		@Test
 		@DisplayName("Add order in Shop Service")
