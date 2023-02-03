@@ -19,12 +19,18 @@ public class ShopService {
 
 	public Optional<Product> getProductById(int id) {
 		Optional<Product> result = availableProducts.getProductById(id);
-		System.out.println(result.isPresent() ? result.toString() : "Product does not exist!");
+		System.out.println(result.isPresent() ? result.get().toString() : "Product does not exist!");
 		return result;
 	}
 
 	public List<Product> listProducts() {
-		return availableProducts.listProducts();
+		List<Product> productList = availableProducts.listProducts();
+		System.out.println("These are the products in the repository:");
+		for (Product p : productList) {
+			System.out.println("- " + p);
+		}
+		//System.out.println(productList);
+		return productList;
 	}
 
 	public void addOrder(Order order) {
