@@ -17,8 +17,9 @@ public class ProductRepo {
 		return products;
 	}
 	public Optional<Product> getProductById(int id) {
-		//return products.stream().filter(product -> product.getId() == id).findFirst();
-		return Optional.empty();
+		return products.stream()
+				.filter(p -> p.getId() == id)
+				.findFirst();
 	}
 
 }
