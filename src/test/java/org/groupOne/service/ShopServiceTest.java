@@ -23,47 +23,59 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @Nested
 class ShopServiceTest {
+	ShopService emptyShopService;
+	ShopService fullShopService;
 	List<Product> products;
 	Product kawasaki;
 	Product bmw;
 	ProductRepo productRepo;
-	ShopService shopService;
+	Order order;
 
 	@BeforeEach
-	void setUp() throws Exception {
+	@DisplayName("Set up the Testing variables")
+	void setUp() {
 		// Given
-		kawasaki = new Motorcycle(1, "Kawasaki", new BigDecimal("1200000"));
-		bmw = new Car(2, "BMW", new BigDecimal("2500000"));
+		bmw = new Car(1, "BMW", new BigDecimal("2500000"));
+		kawasaki = new Motorcycle(2, "Kawasaki", new BigDecimal("1200000"));
 		products = List.of(kawasaki, bmw);
+		order = new Order(1, products);
 		productRepo = new ProductRepo(products);
-		shopService = new ShopService(productRepo);
+		emptyShopService = new ShopService(productRepo);
+		fullShopService = new ShopService(productRepo , new OrderRepo(List.of(order)));
 	}
 
-	@Test
-	void getProductById_existing() {
-		// WHEN
-		Product actual = shopService.getProductById(2).orElse(null);
-		Product expected = bmw;
+	@Nested
+	@DisplayName("Testing the shop service - product methods")
+	class testingProductsMethods {
 
-		// THEN
-		Assertions.assertEquals(expected, actual);
-	}
+		@Test
+		@DisplayName("Get an existing product by id succeeds")
+		void getProductById_existing() {
+			// WHEN
+			Product actual = fullShopService.getProductById(1).orElse(null);
+			Product expected = bmw;
+			// THEN
+			Assertions.assertEquals(expected, actual);
+		}
 
-	@Test
-	void getProductById_notExisting() {
-		// WHEN
-		Product actual = shopService.getProductById(200).orElse(null);
+		@Test
+		@DisplayName("Get an non-existent product by id returns an empty Optional")
+		void getProductById_notExisting() {
+			// WHEN
+			Product actual = fullShopService.getProductById(200).orElse(null);
 
-		// THEN
-		Assertions.assertNull(actual);
-	}
+			// THEN
+			Assertions.assertNull(actual);
+		}
 
-	@Test
-	void listProducts() {
-		//WHEN
-		List<Product> actualProductList = shopService.listProducts();
-		//THEN
-		assertThat(actualProductList).containsExactlyInAnyOrderElementsOf(products);
+		@Test
+		@DisplayName("Shop service lists all products")
+		void listProducts() {
+			//WHEN
+			List<Product> actualProductList = fullShopService.listProducts();
+			//THEN
+			assertThat(actualProductList).containsExactlyInAnyOrderElementsOf(products);
+		}
 	}
 
 	@DisplayName("Testing the shop service - order methods")
