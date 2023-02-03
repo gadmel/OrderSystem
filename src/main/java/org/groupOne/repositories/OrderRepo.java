@@ -1,18 +1,20 @@
 package org.groupOne.repositories;
 
+import lombok.NoArgsConstructor;
 import org.groupOne.model.Order;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class OrderRepo {
-	private List<Order> orders;
+	private List<Order> orders = new ArrayList<>();
 
 	public List<Order> listOrders() {
 		return orders;
