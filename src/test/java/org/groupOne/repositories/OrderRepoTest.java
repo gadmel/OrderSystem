@@ -48,6 +48,15 @@ class OrderRepoTest {
 	}
 
 	@Test
+	@DisplayName("Get order by id gets empty")
+	void getByIdGetsEmpty() {
+		Assertions.assertEquals(Optional.empty(), repository.getById(2));
+	}
+
+
+
+
+	@Test
 	@DisplayName("Add single order")
 	void addSingleOrder() {
 		// When
