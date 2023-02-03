@@ -31,4 +31,30 @@ class ProductRepoTest {
 		// Then
 		Assertions.assertNotNull(productRepo);
 	}
+
+	@Test
+	void test_listProducts() {
+		// When
+		List<Product> result = productRepo.listProducts();
+		List<Product> expected = List.of(kawasaki, bmw);
+
+		// Then
+		Assertions.assertEquals(expected, result);
+	}
+	@Test
+	void testGetProductById_exists() {
+		//WHEN
+		Product expected = kawasaki;
+		Product actual = productRepo.getProductById(1).orElse(null);
+		//THEN
+		Assertions.assertEquals(expected, actual);
+
+	}
+	@Test
+	void testGetProductById_DoesNotExist() {
+		//WHEN
+		Optional<Product> actual = productRepo.getProductById(8);
+		//THEN
+		Assertions.assertTrue(actual.isEmpty());
+	}
 }

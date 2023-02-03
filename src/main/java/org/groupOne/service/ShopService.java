@@ -14,18 +14,22 @@ public class ShopService {
 //	private OrderRepo archivedOrders;
 
 	public Optional<Product> getProductById(int id) {
+		return null;
 	}
 
 	public List<Product> listProducts() {
+		return null;
 	}
 
 	public void addOrder(Order order) {
 	}
 
 	public Optional<Order> getOrderById() {
+		return null;
 	}
 
 	public List<Order> listOrders() {
+		return null;
 	}
 
 }
